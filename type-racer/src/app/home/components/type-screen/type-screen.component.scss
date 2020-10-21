@@ -1,0 +1,48 @@
+.type-screen {
+  .race-area {
+    .car {
+      margin-top: 16px;
+
+      &-info {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        h3 {
+          margin-right: 5px;
+          font-size: 1rem;
+        }
+
+        img {
+          width: 60px;
+        }
+      }
+
+      .progress {
+        height: 10px;
+      }
+    }
+  }
+
+  .start {
+    text-align: center;
+    margin-top: 16px;
+
+    .btn-start {
+      padding: 10px 40px;
+      color: #f0a800;
+      border: 2px solid #f0a800;
+      font-size: 1.2rem;
+      font-weight: 600;
+
+      &:hover {
+        background-color: #f0a800;
+        color: #fff;
+      }
+    }
+  }
+
+  .text-area {
+    margin-top: 16px;
+  }
+}
