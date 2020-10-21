@@ -33,26 +33,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  onLoginFb() {
-    // this.afAuth.signInWithPopup(new auth.FacebookAuthProvider());
-    return new Promise<any>((resolve, reject) => {
-      let provider = new auth.FacebookAuthProvider();
-      this.afAuth.signInWithPopup(provider).then(
-        (res) => {
-          resolve(res);
-          this.user.name = res.user.displayName;
-          this.user.ava = res.user.photoURL;
-          this.checkLogin = true;
-        },
-        (err) => {
-          console.log(err);
-          reject(err);
-        }
-      );
-    });
-  }
-
-  onGoogleFb() {
+  onGoogle() {
     // this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
     return new Promise<any>((resolve, reject) => {
       let provider = new auth.GoogleAuthProvider();

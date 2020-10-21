@@ -13,10 +13,8 @@
                 </div>
                 <div class="login">
                     <div *ngIf="!checkLogin">
-                        <button class="login-btn login-btn-fb" (click)="onLoginFb()">Đăng nhập với facebook</button>
-                        <button class="login-btn login-btn-gm" (click)="onGoogleFb()">Đăng nhập với google</button>
+                        <button class="login-btn login-btn-gm" (click)="onGoogle()">Đăng nhập với google</button>
                     </div>
-
                     <span *ngIf="checkLogin" (click)="onLogout()">Thoát tài khoản</span>
                 </div>
             </div>
