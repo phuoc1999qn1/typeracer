@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { __awaiter } from 'tslib';
 
 @Component({
   selector: 'app-type-screen',
@@ -12,13 +13,16 @@ export class TypeScreenComponent implements OnInit {
   constructor(public db: AngularFireDatabase) {}
 
   ngOnInit(): void {
-    this.db
+    this.getDB();
+  }
+
+  getDB() {
+    return this.db
       .list('paragraph')
       .valueChanges()
       .subscribe((res) => {
         this.item = res;
         this.random = this.getRandomInt(this.item.length);
-        console.log(this.random);
       });
   }
 
