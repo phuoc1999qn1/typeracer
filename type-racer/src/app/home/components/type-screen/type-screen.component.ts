@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { __awaiter } from 'tslib';
+
+declare var $;
 
 @Component({
   selector: 'app-type-screen',
@@ -13,6 +14,7 @@ export class TypeScreenComponent implements OnInit {
   constructor(public db: AngularFireDatabase) {}
 
   ngOnInit(): void {
+    $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
     this.getDB();
   }
 
