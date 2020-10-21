@@ -1,1 +1,25 @@
-<p>header works!</p>
+<header>
+    <div class="padding-10">
+        <div class="header d-flex justify-content-between">
+            <div class="header-title d-flex">
+                <img src="../../../../assets/img/logo.png" alt="">
+                <a href="#">Bốc đồu</a>
+            </div>
+            <div class="header-login">
+                <a *ngIf="!checkLogin" href="#">Sign in</a>
+                <div *ngIf="checkLogin">
+                    <img src="{{user.ava}}" alt="">
+                    <span>{{user.name}}</span>
+                </div>
+                <div class="login">
+                    <div *ngIf="!checkLogin">
+                        <button class="login-btn login-btn-fb" (click)="onLoginFb()">Đăng nhập với facebook</button>
+                        <button class="login-btn login-btn-gm" (click)="onGoogleFb()">Đăng nhập với google</button>
+                    </div>
+
+                    <span *ngIf="checkLogin" (click)="onLogout()">Thoát tài khoản</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
