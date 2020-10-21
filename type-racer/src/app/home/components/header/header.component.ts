@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService
   ) {}
 
+  checkLogin = false;
   user: any = {
     name: '',
     ava: '',
@@ -28,10 +29,6 @@ export class HeaderComponent implements OnInit {
       if (auth) {
         this.user.name = auth.displayName;
         this.user.ava = auth.photoURL;
-        console.log(auth);
-      } else  {
-        console.log('abc');
-        this.user = null;
       }
     });
   }
@@ -40,23 +37,42 @@ export class HeaderComponent implements OnInit {
     // this.afAuth.signInWithPopup(new auth.FacebookAuthProvider());
     return new Promise<any>((resolve, reject) => {
       let provider = new auth.FacebookAuthProvider();
-      this.afAuth
-      .signInWithPopup(provider)
-      .then(res => {
-        resolve(res);
-        console.log(res);
-      }, err => {
-        console.log(err);
-        reject(err);
-      })
-    })
+      this.afAuth.signInWithPopup(provider).then(
+        (res) => {
+          resolve(res);
+          this.user.name = res.user.displayName;
+          this.user.ava = res.user.photoURL;
+          this.checkLogin = true;
+        },
+        (err) => {
+          console.log(err);
+          reject(err);
+        }
+      );
+    });
   }
 
   onGoogleFb() {
-    this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+    // this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+    return new Promise<any>((resolve, reject) => {
+      let provider = new auth.GoogleAuthProvider();
+      this.afAuth.signInWithPopup(provider).then(
+        (res) => {
+          resolve(res);
+          this.user.name = res.user.displayName;
+          this.user.ava = res.user.photoURL;
+          this.checkLogin = true;
+        },
+        (err) => {
+          console.log(err);
+          reject(err);
+        }
+      );
+    });
   }
 
   onLogout() {
     this.afAuth.signOut();
+    this.checkLogin = false;
   }
 }
