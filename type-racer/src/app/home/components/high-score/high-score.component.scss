@@ -1,0 +1,16 @@
+.high-score {
+  .padding-10 {
+    padding: 5px 10%;
+    .col-6 {
+      margin: 0 auto;
+      border: 1px solid blueviolet;
+
+      .nav-link {
+        color: violet;
+      }
+      .active {
+          color: blueviolet;
+      }
+    }
+  }
+}
