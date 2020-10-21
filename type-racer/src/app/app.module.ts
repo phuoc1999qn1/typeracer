@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { environment } from '../environments/environment';
 
 
@@ -32,6 +33,7 @@ import { HighScoreComponent } from './home/components/high-score/high-score.comp
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    AngularFireAnalyticsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
