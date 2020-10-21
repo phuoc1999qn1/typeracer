@@ -1,0 +1,42 @@
+.create-game {
+  .content {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      text-transform: uppercase;
+    }
+
+    .decision {
+      .btn {
+        font-size: 20px;
+        padding: 8px 32px;
+        background-color: #fff;
+        border: 2px solid #1A00CC;
+        color: #1A00CC;
+        font-weight: 600;
+        margin: 0 8px;
+  
+        &:hover {
+          background-color: #1A00CC;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .enter-name {
+    margin: 16px 0;
+
+    h6 {
+      font-size: 20px;
+    }
+
+    input {
+      width: 400px;
+    }
+  }
+}
