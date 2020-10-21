@@ -14,6 +14,7 @@ import { HomeComponent } from './home/components/home/home.component';
 import { CreateGameComponent } from './home/components/create-game/create-game.component';
 import { JoinGameComponent } from './home/components/join-game/join-game.component';
 import { TypeScreenComponent } from './home/components/type-screen/type-screen.component';
+import { HighScoreComponent } from './home/components/high-score/high-score.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TypeScreenComponent } from './home/components/type-screen/type-screen.c
     HomeComponent,
     CreateGameComponent,
     JoinGameComponent,
-    TypeScreenComponent
+    TypeScreenComponent,
+    HighScoreComponent
   ],
   imports: [
     BrowserModule,
