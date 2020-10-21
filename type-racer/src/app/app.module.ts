@@ -10,11 +10,19 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './home/components/header/header.component';
+import { HomeComponent } from './home/components/home/home.component';
+import { CreateGameComponent } from './home/components/create-game/create-game.component';
+import { JoinGameComponent } from './home/components/join-game/join-game.component';
+import { TypeScreenComponent } from './home/components/type-screen/type-screen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    HomeComponent,
+    CreateGameComponent,
+    JoinGameComponent,
+    TypeScreenComponent
   ],
   imports: [
     BrowserModule,

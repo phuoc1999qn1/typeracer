@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "type-racer"
+    }
+  },
+  "defaultProject": "type-racer",
+  "cli": {
+    "analytics": "4a7d4f5a-660e-440e-acf7-104afd16a465"
+  }
 }

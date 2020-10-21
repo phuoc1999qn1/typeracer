@@ -1,0 +1,45 @@
+.homepage {
+
+
+  &-title {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .direction {
+      .btn {
+        color: #fff;
+        font-weight: 600;
+
+        &:hover {
+          background-color: #1A00CC;
+          color: #fff;
+        }
+      }
+
+      .btn-create {
+        padding: 10px 30px;
+        background-color: #fff;
+        margin-right: 16px;
+        color: #1A00CC;
+        border: 2px solid #1A00CC;
+      }
+
+      .btn-join {
+        padding: 10px 40px;
+        background-color: #fff;
+        color: #1A00CC;
+        border: 2px solid #1A00CC;
+      }
+    }
+  }
+}
+
