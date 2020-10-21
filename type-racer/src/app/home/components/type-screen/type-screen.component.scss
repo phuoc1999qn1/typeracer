@@ -1,5 +1,5 @@
 .type-screen {
-  .col-6 {
+  .col-8 {
     &:first-child {
       margin: 48px auto 0;
     }
@@ -52,15 +52,20 @@
       }
     }
   }
-.footer {
-  background-color: #ececec;
-  .text-area {
-    font-size: 25px;
-    input {
+  .footer {
+    padding-bottom: 12px;
+    background-color: #ececec;
+    .text-area {
+      padding: 8px;
       font-size: 25px;
-      padding: 6px;
+    }
+    .input {
+      margin: 12px;
+      input {
+        opacity: 95%;
+        font-size: 18px;
+        padding: 6px;
+      }
     }
   }
-}
-
 }
