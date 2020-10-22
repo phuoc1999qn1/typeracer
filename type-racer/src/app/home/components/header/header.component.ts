@@ -29,9 +29,7 @@ export class HeaderComponent implements OnInit {
       if (auth) {
         this.user.name = auth.displayName;
         this.user.ava = auth.photoURL;
-      }
-        else this.checkLogin = false;
-        
+      } else this.checkLogin = false;
     });
   }
 
@@ -44,6 +42,7 @@ export class HeaderComponent implements OnInit {
           resolve(res);
           this.user.name = res.user.displayName;
           this.user.ava = res.user.photoURL;
+          this.checkLogin = true;
         },
         (err) => {
           console.log(err);

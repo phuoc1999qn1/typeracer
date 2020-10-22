@@ -14,58 +14,47 @@ export class TypeScreenComponent implements OnInit {
   constructor(public db: AngularFireDatabase) {}
 
   ngOnInit(): void {
-    
-    this.getDB();
     $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
-    this.getDB();
-    
-    var quoteInputElement = document.getElementById('typeInput')
-    const quoteDisplay = document.getElementById('quote')
-    
+    this.xuLy();
+    this.splitWord();
+  }
+
+  xuLy() {
+    let quoteInputElement = document.getElementById('typeInput');
+    const quoteDisplay = document.getElementById('quote');
+
     quoteInputElement.addEventListener('input', () => {
-      const arrayQuote = quoteDisplay.querySelectorAll('span')
-      var arrayValue = $('#typeInput').val().split('')
-      console.log(arrayValue)
+      const arrayQuote = quoteDisplay.querySelectorAll('span');
+      let arrayValue = $('#typeInput').val().split('');
+      console.log(arrayValue);
 
       arrayQuote.forEach((characterSpan, index) => {
-        var character = arrayValue[index]
+        let character = arrayValue[index];
 
         if (character == null) {
-          characterSpan.style.color = "#000"
+          characterSpan.style.color = '#000';
         } else if (character === characterSpan.innerText) {
-          characterSpan.style.color = "#3bbb1b";
-           
-        } else if (character !== characterSpan.innerText) {
-          characterSpan.style.color = "#c52121"
+          characterSpan.style.color = '#3bbb1b';
         } else {
-          characterSpan.style.color = "#000"
+          characterSpan.style.color = '#c52121';
         }
-      })
-    })
-
-    this.splitWord()
+      });
+    });
   }
-
   splitWord() {
-    
-    var quoteDisplay = document.getElementById('quote')
-    // var quote = this.item[0]
-    // console.log(quote)
-    // quote.split('').forEach(chara => {
-    //   var charaSpan = document.createElement('span')
-    //   charaSpan.innerText = chara
-    //   quoteDisplay.appendChild(charaSpan)
-    // })
-
-  }
-
-  getDB() {
-    return this.db
+    this.db
       .list('paragraph')
       .valueChanges()
       .subscribe((res) => {
         this.item = res;
-        // this.random = this.getRandomInt(this.item.length);
+        this.random = this.getRandomInt(this.item.length);
+        var quoteDisplay = document.getElementById('quote');
+        var quote = this.item[this.random];
+        quote.split('').forEach((chara) => {
+          var charaSpan = document.createElement('span');
+          charaSpan.innerText = chara;
+          quoteDisplay.appendChild(charaSpan);
+        });
       });
   }
 
