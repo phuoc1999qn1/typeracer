@@ -3,10 +3,12 @@
     &:first-child {
       margin: 48px auto 0;
     }
+
     &:last-child {
       margin: 24px auto 0;
     }
   }
+
   .race-area {
     border: 1px solid violet;
 
@@ -52,19 +54,26 @@
       }
     }
   }
+
+  
   .footer {
     padding-bottom: 12px;
     background-color: #ececec;
+
     .text-area {
       padding: 8px;
       font-size: 25px;
     }
+
     .input {
       margin: 12px;
+
       input {
         opacity: 95%;
         font-size: 18px;
         padding: 6px;
+
+        
       }
     }
   }
