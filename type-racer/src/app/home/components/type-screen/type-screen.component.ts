@@ -3,7 +3,6 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 declare var $;
 
-declare var $;
 @Component({
   selector: 'app-type-screen',
   templateUrl: './type-screen.component.html',
@@ -13,16 +12,13 @@ export class TypeScreenComponent implements OnInit {
   item: any[];
   random: number;
   constructor(public db: AngularFireDatabase) {}
-    }
-  ]
-
-  constructor() { }
 
   ngOnInit(): void {
-    this.splitWord()
-
+    
+    this.getDB();
     $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
     this.getDB();
+    
     var quoteInputElement = document.getElementById('typeInput')
     const quoteDisplay = document.getElementById('quote')
     
@@ -46,6 +42,21 @@ export class TypeScreenComponent implements OnInit {
         }
       })
     })
+
+    this.splitWord()
+  }
+
+  splitWord() {
+    
+    var quoteDisplay = document.getElementById('quote')
+    // var quote = this.item[0]
+    // console.log(quote)
+    // quote.split('').forEach(chara => {
+    //   var charaSpan = document.createElement('span')
+    //   charaSpan.innerText = chara
+    //   quoteDisplay.appendChild(charaSpan)
+    // })
+
   }
 
   getDB() {
@@ -54,7 +65,8 @@ export class TypeScreenComponent implements OnInit {
       .valueChanges()
       .subscribe((res) => {
         this.item = res;
-        this.random = this.getRandomInt(this.item.length);
+        console.log(this.item)
+        // this.random = this.getRandomInt(this.item.length);
       });
   }
 
