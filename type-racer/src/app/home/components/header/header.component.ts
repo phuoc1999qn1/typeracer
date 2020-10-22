@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService
   ) {}
 
-  checkLogin = false;
+  checkLogin = true;
   user: any = {
     name: '',
     ava: '',
@@ -30,6 +30,8 @@ export class HeaderComponent implements OnInit {
         this.user.name = auth.displayName;
         this.user.ava = auth.photoURL;
       }
+        else this.checkLogin = false;
+        
     });
   }
 
@@ -42,7 +44,6 @@ export class HeaderComponent implements OnInit {
           resolve(res);
           this.user.name = res.user.displayName;
           this.user.ava = res.user.photoURL;
-          this.checkLogin = true;
         },
         (err) => {
           console.log(err);
@@ -54,6 +55,5 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.afAuth.signOut();
-    this.checkLogin = false;
   }
 }

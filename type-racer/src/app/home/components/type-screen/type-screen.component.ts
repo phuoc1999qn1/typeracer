@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+
+declare var $;
 
 declare var $;
 @Component({
   selector: 'app-type-screen',
   templateUrl: './type-screen.component.html',
-  styleUrls: ['./type-screen.component.scss']
+  styleUrls: ['./type-screen.component.scss'],
 })
 export class TypeScreenComponent implements OnInit {
-  paragraph: any = [
-    {
-      para: "As much money and life as you could want! The two things most human beings would choose above all - the trouble is, humans do have a knack of choosing precisely those things that are worst for them."
+  item: any[];
+  random: number;
+  constructor(public db: AngularFireDatabase) {}
     }
   ]
 
@@ -18,6 +21,8 @@ export class TypeScreenComponent implements OnInit {
   ngOnInit(): void {
     this.splitWord()
 
+    $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
+    this.getDB();
     var quoteInputElement = document.getElementById('typeInput')
     const quoteDisplay = document.getElementById('quote')
     
@@ -43,15 +48,17 @@ export class TypeScreenComponent implements OnInit {
     })
   }
 
-  splitWord() {
-    var quoteElement = document.getElementById("quote");
-    var quote = this.paragraph[0].para
+  getDB() {
+    return this.db
+      .list('paragraph')
+      .valueChanges()
+      .subscribe((res) => {
+        this.item = res;
+        this.random = this.getRandomInt(this.item.length);
+      });
+  }
 
-    quote.split('').forEach(char => {
-      var charSpan = document.createElement('span')
-      // charSpan.style.color = '#3bbb1b'
-      charSpan.innerText = char
-      quoteElement.appendChild(charSpan)
-    })
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
   }
 }
