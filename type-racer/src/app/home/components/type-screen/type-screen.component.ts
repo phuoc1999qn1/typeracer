@@ -65,7 +65,6 @@ export class TypeScreenComponent implements OnInit {
       .valueChanges()
       .subscribe((res) => {
         this.item = res;
-        console.log(this.item)
         // this.random = this.getRandomInt(this.item.length);
       });
   }
