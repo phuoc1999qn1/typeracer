@@ -11,36 +11,54 @@ declare var $;
 export class TypeScreenComponent implements OnInit {
   item: any[];
   random: number;
-  constructor(public db: AngularFireDatabase) {}
+  constructor(public db: AngularFireDatabase) { }
 
   ngOnInit(): void {
     $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
-    this.xuLy();
+    this.process();
     this.splitWord();
+    
   }
 
-  xuLy() {
+  process() {
     let quoteInputElement = document.getElementById('typeInput');
-    const quoteDisplay = document.getElementById('quote');
+    let quoteDisplay = document.getElementById('quote');
+    let flag = false;
 
     quoteInputElement.addEventListener('input', () => {
-      const arrayQuote = quoteDisplay.querySelectorAll('span');
+      let arrayQuote = quoteDisplay.querySelectorAll('span');
       let arrayValue = $('#typeInput').val().split('');
-      console.log(arrayValue);
 
       arrayQuote.forEach((characterSpan, index) => {
         let character = arrayValue[index];
 
+        if (character === ' ') {
+          setInterval(this.move, 200)
+        }
+
         if (character == null) {
           characterSpan.style.color = '#000';
+          characterSpan.style.backgroundColor = '#ececec';
         } else if (character === characterSpan.innerText) {
           characterSpan.style.color = '#3bbb1b';
+          characterSpan.style.backgroundColor = '#ececec';
         } else {
-          characterSpan.style.color = '#c52121';
+          characterSpan.style.backgroundColor = '#c52121';
         }
       });
     });
   }
+
+  move() {
+    let quoteDisplay = document.getElementById('quote');
+    let move = document.getElementById('run')
+    let max = quoteDisplay.innerText.length
+
+    for (let i = 0; i <= max; i++) {
+      move.style.paddingLeft = i + "px";
+    }
+  }
+
   splitWord() {
     this.db
       .list('paragraph')
@@ -57,6 +75,8 @@ export class TypeScreenComponent implements OnInit {
         });
       });
   }
+
+
 
   getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
