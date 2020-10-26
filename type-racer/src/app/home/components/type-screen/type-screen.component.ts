@@ -10,10 +10,19 @@ declare var $;
 })
 export class TypeScreenComponent implements OnInit {
   item: any[];
+  itemRef : any;
+  key : string;
   random: number;
-  constructor(public db: AngularFireDatabase) {}
-
+  constructor(public db: AngularFireDatabase) {
+  }
   ngOnInit(): void {
+    this.itemRef = this.db.object('item');
+    this.itemRef.snapshotChanges().subscribe((action) => {
+      console.log(action.type);
+      console.log(action.key);
+      console.log(action.payload.val());
+    });
+
     $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
     this.xuLy();
     this.splitWord();
