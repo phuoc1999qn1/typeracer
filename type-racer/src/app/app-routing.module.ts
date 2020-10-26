@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'create-game', component: CreateGameComponent },
   { path: 'join-game', component: JoinGameComponent },
-  { path: 'type-screen/:roomId', component: TypeScreenComponent },
+  { path: 'type-screen', component: TypeScreenComponent },
   { path: 'high-score', component: HighScoreComponent }
 
 ];

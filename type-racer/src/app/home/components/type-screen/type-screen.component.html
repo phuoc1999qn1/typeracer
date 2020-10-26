@@ -9,7 +9,7 @@
               <img src="assets/img/car/dinorsaur.png">
             </div>
             <div class="progress">
-              <div class="progress-bar bg-success" style="width: 10%;" aria-valuenow="25" aria-valuemin="0"
+              <div class="progress-bar bg-success" style="width: 0%;" aria-valuenow="25" aria-valuemin="0"
                 aria-valuemax="100"></div>
             </div>
           </div>
@@ -27,7 +27,7 @@
           <div id="quote" class="text-area">
           </div>
           <div class="input">
-            <input id="typeInput" class="form-control text-center w-100" type="text" #a (keyup.space)="move(a)" placeholder="Type here...">
+            <input id="typeInput" maxlength="12" class="form-control text-center w-100"  type="text" placeholder="Type here...">
           </div>
         </div>
       </div>

@@ -10,27 +10,24 @@ declare var $;
 })
 export class TypeScreenComponent implements OnInit {
   item: any[];
-  itemRef : any;
-  key : string;
   random: number;
   paragraph: string[];
   index = 0;
-  run = 10;
+  l1: number = 1;
+  l2: number = 0;
+  run: number;
+  run1: number = 1;
+  check = [];
 
   constructor(public db: AngularFireDatabase) {
 
   }
   ngOnInit(): void {
-    this.itemRef = this.db.object('item');
-    this.itemRef.snapshotChanges().subscribe((action) => {
-      console.log(action.type);
-      console.log(action.key);
-      console.log(action.payload.val());
-    });
-
     $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
-    this.splitWord();
-    this.process();
+    this.splitWord()
+    setTimeout(() => {
+      this.process();
+    }, 3000);
   }
 
   // Kiểm tra nội dung nhập trùng khớp với văn bản đưa ra
@@ -39,70 +36,51 @@ export class TypeScreenComponent implements OnInit {
     //hien thi para
     let quoteDisplay = document.getElementById('quote');
 
+    this.run = (1 / quoteDisplay.innerText.split(' ').length * 100);
+
     quoteInputElement.addEventListener('input', () => {
-      let arrayQuote = quoteDisplay.querySelectorAll('span');
+      // cat para
+      const arrQuote = quoteDisplay.innerText.split(' ')[this.l2];
+      const arrQuoteSplit = arrQuote.split('');
+
+      //lay input
       let arrayValue = $('#typeInput').val().split('');
+      let temp = arrayValue.pop();
 
 
-
-      arrayQuote.forEach((characterSpan, index) => {
-        let characterInput = arrayValue[index];
-
-        // console.log('pro');
-
-        if (characterInput == null) {
-          characterSpan.style.color = '#000';
-          characterSpan.style.backgroundColor = '#ececec';
-        } else if (characterInput === characterSpan.innerText) {
-          characterSpan.style.color = '#3bbb1b';
-          characterSpan.style.backgroundColor = '#ececec';
-        } else {
-          characterSpan.style.backgroundColor = '#c52121';
+      if ((temp == '.' && arrQuoteSplit[arrayValue.length] == temp &&
+        this.check.filter(x => x == false).length == 0)) {
+        $('#quote').find(`span:nth-child(${this.l1 + arrayValue.length})`).css({ "color": "#3bbb1b", "background-color": "#ececec" })
+        this.l1 += arrayValue.length + 1;
+        this.l2++;
+        $('#typeInput').val(null);
+        $('#typeInput').attr("placeholder", null);
+        this.run1 += this.run;
+        $('.progress-bar').css("width", this.run1 + "%");
+        $('.car-info').css("padding-left", this.run1 - 10 + "%")
+      } else if ((temp == ' ' && arrQuoteSplit.length == arrayValue.length &&
+        this.check.filter(x => x == false).length == 0)) {
+        this.l1 += arrayValue.length + 1;
+        this.l2++;
+        this.run1 += this.run;
+        $('#typeInput').val(null);
+        $('#typeInput').attr("placeholder", null);
+        $('.progress-bar').css("width", this.run1 + "%");
+        $('.car-info').css("padding-left", this.run1 - 10 + "%")
+      } else if (arrayValue.length < arrQuoteSplit.length) {
+        if (arrQuoteSplit[arrayValue.length] == temp) {
+          $('#typeInput').css("background-color", "white")
+          this.check[arrayValue.length] = true;
+          $('#quote').find(`span:nth-child(${this.l1 + arrayValue.length})`).css({ "color": "#3bbb1b", "background-color": "#ececec" })
+        } else if (arrQuote[this.l1] != temp) {
+          this.check[arrayValue.length] = false;
+          $('#quote').find(`span:nth-child(${this.l1 + arrayValue.length})`).css({ "color": "#803333", "background-color": "#f0a3a3" })
+          $('#typeInput').css("background-color", "#f0a3a3")
         }
-      });
+      }
     });
   }
 
-  move(a) {
-    a.value = null;
-    a.placeholder = '';
-    // let quoteDisplay = document.getElementById('quote');
-    let inputValue = $('#typeInput').val();
-    // let temp = document.getElementById('typeInput');
-    // this.paragraph = quoteDisplay.innerText.split(' ');
-
-
-    // temp.nodeValue = null;
-    // console.log(this.paragraph[1])
-    // console.log(this.paragraph.length)
-
-    // console.log(quoteDisplay.innerText.split(' '))
-
-    // for (let i = 0; i < this.paragraph.length; i++) {
-
-    // }
-    // console.log(a.split(' ')[index])
-
-    // console.log(input.value.trim())
-    if (this.index < this.paragraph.length) {
-      if (inputValue.split(' ')[this.index] === this.paragraph[this.index]) {
-        // console.log(inputValue.split(' ')[this.index])
-        // this.paragraph = this.paragraph.filter(() => this.paragraph.shift());
-        // console.log(this.paragraph)
-        this.paragraph.shift();
-        console.log(this.paragraph)
-        this.index++;
-        this.run += (90 / this.paragraph.length);
-        $('.progress-bar').css("width", this.run + "%");
-        $('.car-info').css("padding-left", this.run - 10 + "%")
-      }
-      else {
-        console.log("Error!!!")
-      }
-    }
-
-
-  }
 
 
   // Tách nội dung văn bản thành từng kí tự
