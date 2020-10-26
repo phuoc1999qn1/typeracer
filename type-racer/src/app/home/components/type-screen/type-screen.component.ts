@@ -13,7 +13,12 @@ export class TypeScreenComponent implements OnInit {
   itemRef : any;
   key : string;
   random: number;
+  paragraph: string[];
+  index = 0;
+  run = 10;
+
   constructor(public db: AngularFireDatabase) {
+
   }
   ngOnInit(): void {
     this.itemRef = this.db.object('item');
@@ -24,32 +29,83 @@ export class TypeScreenComponent implements OnInit {
     });
 
     $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
-    this.xuLy();
     this.splitWord();
+    this.process();
   }
 
-  xuLy() {
+  // Kiểm tra nội dung nhập trùng khớp với văn bản đưa ra
+  process() {
     let quoteInputElement = document.getElementById('typeInput');
-    const quoteDisplay = document.getElementById('quote');
+    //hien thi para
+    let quoteDisplay = document.getElementById('quote');
 
     quoteInputElement.addEventListener('input', () => {
-      const arrayQuote = quoteDisplay.querySelectorAll('span');
+      let arrayQuote = quoteDisplay.querySelectorAll('span');
       let arrayValue = $('#typeInput').val().split('');
-      console.log(arrayValue);
+
+
 
       arrayQuote.forEach((characterSpan, index) => {
-        let character = arrayValue[index];
+        let characterInput = arrayValue[index];
 
-        if (character == null) {
+        // console.log('pro');
+
+        if (characterInput == null) {
           characterSpan.style.color = '#000';
-        } else if (character === characterSpan.innerText) {
+          characterSpan.style.backgroundColor = '#ececec';
+        } else if (characterInput === characterSpan.innerText) {
           characterSpan.style.color = '#3bbb1b';
+          characterSpan.style.backgroundColor = '#ececec';
         } else {
-          characterSpan.style.color = '#c52121';
+          characterSpan.style.backgroundColor = '#c52121';
         }
       });
     });
   }
+
+  move(a) {
+    a.value = null;
+    a.placeholder = '';
+    // let quoteDisplay = document.getElementById('quote');
+    let inputValue = $('#typeInput').val();
+    // let temp = document.getElementById('typeInput');
+    // this.paragraph = quoteDisplay.innerText.split(' ');
+
+
+    // temp.nodeValue = null;
+    // console.log(this.paragraph[1])
+    // console.log(this.paragraph.length)
+
+    // console.log(quoteDisplay.innerText.split(' '))
+
+    // for (let i = 0; i < this.paragraph.length; i++) {
+
+    // }
+    // console.log(a.split(' ')[index])
+
+    // console.log(input.value.trim())
+    if (this.index < this.paragraph.length) {
+      if (inputValue.split(' ')[this.index] === this.paragraph[this.index]) {
+        // console.log(inputValue.split(' ')[this.index])
+        // this.paragraph = this.paragraph.filter(() => this.paragraph.shift());
+        // console.log(this.paragraph)
+        this.paragraph.shift();
+        console.log(this.paragraph)
+        this.index++;
+        this.run += (90 / this.paragraph.length);
+        $('.progress-bar').css("width", this.run + "%");
+        $('.car-info').css("padding-left", this.run - 10 + "%")
+      }
+      else {
+        console.log("Error!!!")
+      }
+    }
+
+
+  }
+
+
+  // Tách nội dung văn bản thành từng kí tự
   splitWord() {
     this.db
       .list('paragraph')

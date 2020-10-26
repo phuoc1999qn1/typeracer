@@ -3,53 +3,13 @@
     <div class="row">
       <div class="col-8">
         <div class="race-area">
-          <!-- <div class="car">
-            <div class="car-info">
-              <h3>Hello</h3>
-              <img src="assets/img/car/dinorsaur.png">
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-success" style="width: 10%" aria-valuenow="25" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-          </div> -->
           <div class="car">
-            <div class="car-info">
+            <div id="run" class="car-info">
               <h3>Hello</h3>
               <img src="assets/img/car/dinorsaur.png">
             </div>
             <div class="progress">
-              <div class="progress-bar bg-success" style="width: 10%" aria-valuenow="25" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="car">
-            <div class="car-info">
-              <h3>Hello</h3>
-              <img src="assets/img/car/dinorsaur.png">
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-success" style="width: 10%" aria-valuenow="25" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="car">
-            <div class="car-info">
-              <h3>Hello</h3>
-              <img src="assets/img/car/dinorsaur.png">
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-success" style="width: 10%" aria-valuenow="25" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="car">
-            <div class="car-info">
-              <h3>Hello</h3>
-              <img src="assets/img/car/dinorsaur.png">
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-success" style="width: 10%" aria-valuenow="25" aria-valuemin="0"
+              <div class="progress-bar bg-success" style="width: 10%;" aria-valuenow="25" aria-valuemin="0"
                 aria-valuemax="100"></div>
             </div>
           </div>
@@ -65,10 +25,9 @@
       <div class="col-8">
         <div class="footer">
           <div id="quote" class="text-area">
-            <!-- {{item[random]}} -->
           </div>
           <div class="input">
-            <input id="typeInput" class="form-control text-center w-100" type="text" placeholder="Type here...">
+            <input id="typeInput" class="form-control text-center w-100" type="text" #a (keyup.space)="move(a)" placeholder="Type here...">
           </div>
         </div>
       </div>
@@ -96,8 +55,8 @@
               <thead>
                 <tr>
                   <th scope="col"></th>
-                  <th scope="col "colspan="2">name</th>
-                  <th scope="col" >speed</th>
+                  <th scope="col " colspan="2">name</th>
+                  <th scope="col">speed</th>
                   <th scope="col">time</th>
                 </tr>
               </thead>
