@@ -27,7 +27,7 @@
           <div id="quote" class="text-area">
           </div>
           <div class="input">
-            <input id="typeInput" class="form-control text-center w-100" type="text" #a (keyup.space)="move(a)" placeholder="Type here...">
+            <input id="typeInput" class="form-control text-center w-100" type="text" #input (keyup)="color(input)" (keyup.space)="move(input)" placeholder="Type here...">
           </div>
         </div>
       </div>
