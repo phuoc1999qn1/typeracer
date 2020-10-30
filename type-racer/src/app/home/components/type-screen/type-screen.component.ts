@@ -16,7 +16,7 @@ export class TypeScreenComponent implements OnInit {
   l1: number = 1;
   l2: number = 0;
   run: number;
-  run1: number = 1;
+  run1: number = 0;
   check = [];
 
   constructor(public db: AngularFireDatabase) {
@@ -27,7 +27,7 @@ export class TypeScreenComponent implements OnInit {
     this.splitWord()
     setTimeout(() => {
       this.process();
-    }, 3000);
+    }, 1);
   }
 
   // Kiểm tra nội dung nhập trùng khớp với văn bản đưa ra
@@ -35,9 +35,12 @@ export class TypeScreenComponent implements OnInit {
     let quoteInputElement = document.getElementById('typeInput');
     //hien thi para
     let quoteDisplay = document.getElementById('quote');
+    //do dai word
+    let wordLength = quoteDisplay.innerText.split(' ').length
 
-    this.run = (1 / quoteDisplay.innerText.split(' ').length * 100);
 
+    this.run = (1 / (wordLength + 1) * 100);
+    
     quoteInputElement.addEventListener('input', () => {
       // cat para
       const arrQuote = quoteDisplay.innerText.split(' ')[this.l2];
@@ -49,13 +52,13 @@ export class TypeScreenComponent implements OnInit {
 
 
       if ((temp == '.' && arrQuoteSplit[arrayValue.length] == temp &&
-        this.check.filter(x => x == false).length == 0)) {
+        this.check.filter(x => x == false).length == 0) && wordLength === this.l2) {
         $('#quote').find(`span:nth-child(${this.l1 + arrayValue.length})`).css({ "color": "#3bbb1b", "background-color": "#ececec" })
-        this.l1 += arrayValue.length + 1;
-        this.l2++;
+
         $('#typeInput').val(null);
         $('#typeInput').attr("placeholder", null);
         this.run1 += this.run;
+        
         $('.progress-bar').css("width", this.run1 + "%");
         $('.car-info').css("padding-left", this.run1 - 10 + "%")
       } else if ((temp == ' ' && arrQuoteSplit.length == arrayValue.length &&
@@ -63,6 +66,9 @@ export class TypeScreenComponent implements OnInit {
         this.l1 += arrayValue.length + 1;
         this.l2++;
         this.run1 += this.run;
+        console.log(this.run1);
+        console.log(this.run);
+
         $('#typeInput').val(null);
         $('#typeInput').attr("placeholder", null);
         $('.progress-bar').css("width", this.run1 + "%");
