@@ -8,7 +8,7 @@ import { HighScoreComponent } from './home/components/high-score/high-score.comp
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'join-game', component: JoinGameComponent },
-  { path: 'type-screen', component: TypeScreenComponent },
+  { path: 'type-screen/:abc', component: TypeScreenComponent },
   { path: 'high-score', component: HighScoreComponent }
 
 ];

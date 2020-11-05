@@ -41,11 +41,17 @@ export class TypeScreenComponent implements OnInit {
 
   ngOnInit(): void {
     $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
+    //do dai word
+    let wordLength = quoteDisplay.innerText.split(' ').length
 
     this.splitWord();
     // setTimeout(() => {
     //   console.log(this.paragraph)
     // }, 2000);
+        
+        console.log(this.run1);
+        console.log(this.run);
+
   }
 
 
