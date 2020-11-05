@@ -25,23 +25,23 @@
     <div class="start">
       <button class="btn btn-start" (click)="startTimer()">Start</button>
       <h3 #timeBlock class="time-display">{{timeLeft}}</h3>
-    <div class="start">
-      <button class="btn btn-start" *ngIf="ready">Goo</button>
-    </div>
+      <div class="start">
+        <button class="btn btn-start" *ngIf="ready">Goo</button>
+      </div>
 
-    <div class="row">
-      <div class="col-8">
-        <div class="footer">
-          <div #quote class="text-area">
-            <span>{{ pastWords.join(" ") }} </span>
-            <span style="text-decoration: underline;">{{ currentWord }}</span>
-            <span> {{ futureWords.join(" ") }}</span>
-          </div>
-          <div class="input">
-            <input [style.background-color]="checkInput()" 
-            [(ngModel)]="currentInput" 
-            (ngModelChange)="onInputChange()"
-            type="text" [attr.disabled]="finished" maxlength="20" placeholder="Type here...">
+      <div class="row">
+        <div class="col-8">
+          <div class="footer">
+            <div #quote class="text-area">
+              <span>{{ pastWords.join(" ") }} </span>
+              <span style="text-decoration: underline;">{{ currentWord }}</span>
+              <span> {{ futureWords.join(" ") }}</span>
+            </div>
+            <div class="input" >
+              <input [style.background-color]="checkInput()" [(ngModel)]="currentInput"
+                (ngModelChange)="onInputChange()" type="text" [attr.disabled]="finished" maxlength="20"
+                placeholder="Type here...">
+            </div>
           </div>
         </div>
       </div>

@@ -95,6 +95,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
     this.currentWord = parts[0];
     this.futureWords = parts.splice(1);
 
+
     // this.item = this.item[this.myUser.para].split('');
     // this.pastCharacter = [];
     // this.currentCharacter = this.item[0];
