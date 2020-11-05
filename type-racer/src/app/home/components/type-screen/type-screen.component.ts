@@ -65,39 +65,35 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       this.loadDb(() => {
         if (this.checkPlay) {
           this.splitWord();
-  }
         }
       });
     });
-    startTimer(): void {
-      var interval;
-      interval = setInterval(() => {
-        if (this.timeLeft > 0) {
-          this.timeLeft--;
-        } else {
-          clearInterval(interval);
-        }
-      }, 1000);
-    }
+  }
+
 
   ngOnDestroy(): void {
     this.itemUser.remove(this.userId);
     this.checkLogout = false;
   }
 
-    // Tách nội dung văn bản thành từng từ
-    splitWord(): void {
-      this.db
-        .list('paragraph')
-        .valueChanges()
-        .subscribe((res) => {
-          this.item = res;
-          this.random = this.getRandomInt(this.item.length);
-          const parts = this.item[this.random].split(' ');
-          this.paragraphLength = parts.length;
-          this.pastWords = [];
-          this.currentWord = parts[0];
-          this.futureWords = parts.splice(1);
+  startTimer(): void {
+    let interval;
+    interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
+  // Tách nội dung văn bản thành từng từ
+  splitWord(): void {
+    const parts = this.item[this.myUser.para].split(' ');
+    this.paragraphLength = parts.length;
+    this.pastWords = [];
+    this.currentWord = parts[0];
+    this.futureWords = parts.splice(1);
 
     // this.item = this.item[this.myUser.para].split('');
     // this.pastCharacter = [];
@@ -106,18 +102,17 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
     // this.futureCharacter = this.futureCharacter.splice(1);
     // console.log(this.futureCharacter);
 
-          // console.log(this.charArray)
-          // var quote = this.item;
-          // quote.forEach((chara) => {
-          //   var charaSpan = document.createElement('span');
-          //   charaSpan.innerText = chara;
-          //   this.render.appendChild(this.quote.nativeElement, charaSpan);
-          // });
-        });
-    }
+    // console.log(this.charArray)
+    // var quote = this.item;
+    // quote.forEach((chara) => {
+    //   var charaSpan = document.createElement('span');
+    //   charaSpan.innerText = chara;
+    //   this.render.appendChild(this.quote.nativeElement, charaSpan);
+    // });
+  }
 
-    onInputChange(): void {
-      if(this.currentWord === this.currentInput && this.futureWords.length === 0) {
+  onInputChange(): void {
+    if (this.currentWord === this.currentInput && this.futureWords.length === 0) {
       this.pastWords.push(this.currentWord);
       this.currentInput = '';
       this.currentWord = '';

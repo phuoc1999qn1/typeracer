@@ -14,13 +14,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.roomId = this.db.createPushId();
   }
-<<<<<<< HEAD
   creGame(): void {
-    this.router.navigate(['/type-screen', this.roomId]);
+<<<<<<< HEAD
+    this.router.navigate(['/type-screen'], { queryParams: { roomId: this.roomId } });
 =======
-  creGame() {
     this.router.navigate(['/test'], { queryParams: { roomId: this.roomId } });
->>>>>>> 1e4fefb1d6a845afb8adca9c2b0e6dace5957b1b
+>>>>>>> 5a1430f01976f3ae7cd18d15a48f240ef21c6241
   }
 
 }
