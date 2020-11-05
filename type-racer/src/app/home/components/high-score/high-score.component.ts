@@ -6,7 +6,7 @@ declare var $;
   styleUrls: ['./high-score.component.scss'],
 })
 export class HighScoreComponent implements OnInit {
-  
+
   constructor() {}
 
   ngOnInit(): void {
