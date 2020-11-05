@@ -64,6 +64,14 @@
     .text-area {
       padding: 8px;
       font-size: 25px;
+
+      .success {
+        color: #3bbb1b;
+      }
+
+      .error {
+        background-color: #f0a3a3;
+      }
     }
 
     .input {
@@ -74,7 +82,6 @@
         font-size: 18px;
         padding: 6px;
         font-weight: 600;
-        
       }
     }
   }
