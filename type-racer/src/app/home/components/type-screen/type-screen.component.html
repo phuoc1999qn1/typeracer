@@ -18,7 +18,8 @@
     </div>
 
     <div class="start">
-      <button class="btn btn-start">Start</button>
+      <button class="btn btn-start" (click)="startTimer()">Start</button>
+      <h3 #timeBlock class="time-display">{{timeLeft}}</h3>
     </div>
 
     <div class="row">
@@ -30,9 +31,11 @@
             <span> {{ futureWords.join(" ") }}</span>
           </div>
           <div class="input">
-            <input [style.background-color]="checkInput()" [(ngModel)]="currentInput" (ngModelChange)="onInputChange()"
+            <input [style.background-color]="checkInput()" 
+            [(ngModel)]="currentInput" 
+            (ngModelChange)="onInputChange()"
             autofocus class="form-control text-center w-100"  
-            type="text" maxlength="20" placeholder="Type here...">
+            type="text" [attr.disabled]="finished" maxlength="20" placeholder="Type here...">
           </div>
         </div>
       </div>

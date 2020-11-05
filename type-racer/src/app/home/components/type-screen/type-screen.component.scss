@@ -20,7 +20,7 @@
         display: flex;
         align-items: center;
         width: 100%;
-        transition: padding-left .6s ease;
+        transition: padding-left .3s ease;
 
         h3 {
           margin-right: 5px;
@@ -41,6 +41,10 @@
   .start {
     text-align: center;
     margin-top: 16px;
+
+    .time-display {
+      display: none;
+    }
 
     .btn-start {
       padding: 10px 40px;

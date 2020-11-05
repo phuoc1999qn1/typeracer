@@ -29,7 +29,9 @@ export class HeaderComponent implements OnInit {
       if (auth) {
         this.user.name = auth.displayName;
         this.user.ava = auth.photoURL;
-      } else this.checkLogin = false;
+      } else {
+        this.checkLogin = false;
+      }
     });
   }
 

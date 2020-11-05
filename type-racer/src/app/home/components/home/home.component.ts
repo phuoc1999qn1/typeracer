@@ -9,13 +9,12 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   roomId: string;
-  constructor(private db: AngularFireDatabase,
-    private router: Router) { }
+  constructor(private db: AngularFireDatabase, private router: Router) { }
 
   ngOnInit(): void {
     this.roomId = this.db.createPushId();
   }
-  creGame() {
+  creGame(): void {
     this.router.navigate(['/type-screen', this.roomId]);
   }
 

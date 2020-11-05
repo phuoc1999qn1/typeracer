@@ -12,6 +12,7 @@ export class TypeScreenComponent implements OnInit {
   currentInput: string;
   public flag: boolean;
   public action: boolean;
+  public finished: boolean;
 
   public pastWords: string[] = [];
   public currentWord = '';
@@ -23,6 +24,7 @@ export class TypeScreenComponent implements OnInit {
   public futureCharacter: string[] = [];
 
 
+  timeLeft = 5;
   paragraphLength: number;
   item: any[];
   random: number;
@@ -40,22 +42,24 @@ export class TypeScreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
-    //do dai word
-    let wordLength = quoteDisplay.innerText.split(' ').length
+    $('#myTab a[href="#profile"]').tab('show');
 
     this.splitWord();
-    // setTimeout(() => {
-    //   console.log(this.paragraph)
-    // }, 2000);
-        
-        console.log(this.run1);
-        console.log(this.run);
+  }
 
+  startTimer(): void {
+    var interval;
+    interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
   }
 
 
-  // Tách nội dung văn bản thành từng kí tự
+  // Tách nội dung văn bản thành từng từ
   splitWord(): void {
     this.db
       .list('paragraph')
@@ -91,8 +95,9 @@ export class TypeScreenComponent implements OnInit {
       this.pastWords.push(this.currentWord);
       this.currentInput = '';
       this.currentWord = '';
-      this.runProcess += 100 / this.paragraphLength;
+      this.runProcess += 90 / this.paragraphLength;
       this.runDinosaur += 86 / this.paragraphLength;
+      this.finished = true;
     } else if (this.currentWord + ' ' === this.currentInput) {
       this.pastWords.push(this.currentWord);
       this.currentWord = this.futureWords[0];
@@ -108,7 +113,7 @@ export class TypeScreenComponent implements OnInit {
     }
   }
 
-  checkInput(): string{
+  checkInput(): string {
     if (this.flag) {
       return '#f0a3a3';
     } else {
@@ -116,7 +121,7 @@ export class TypeScreenComponent implements OnInit {
     }
   }
 
-  moveProcess(): string{
+  moveProcess(): string {
     if (this.action) {
       return this.runProcess + '%';
     } else {
