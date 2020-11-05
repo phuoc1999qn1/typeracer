@@ -32,7 +32,6 @@ export class TestComponent implements OnInit, OnDestroy {
       // this.update();
     });
 
-    window.onbeforeunload = () => this.ngOnDestroy();
   }
 
   ngOnDestroy(): void {
