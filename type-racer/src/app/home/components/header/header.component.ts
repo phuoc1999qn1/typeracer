@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { auth } from 'firebase';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,8 +12,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+  ) {
+   }
 
   checkLogin = true;
   user: any = {

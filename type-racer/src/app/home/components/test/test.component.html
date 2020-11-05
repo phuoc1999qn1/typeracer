@@ -1,0 +1,16 @@
+<p>test works!</p>
+
+
+<div *ngIf="listUser">
+    <p *ngFor="let u of listUser"> {{u.id}} - {{u.name}} - {{u.ready}} - {{u.process}}</p>
+</div>
+
+
+<div class="text-center" >
+    <button (click)="start()"> start</button>
+</div>
+
+<div class="text-center" *ngIf="ready" >
+    <button > bat dau</button>
+</div>
+

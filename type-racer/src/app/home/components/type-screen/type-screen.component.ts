@@ -13,11 +13,16 @@ export class TypeScreenComponent implements OnInit {
   random: number;
   paragraph: string[];
   index = 0;
+  //do dai word
   l1: number = 1;
+  //thu tu cua word
   l2: number = 0;
   run: number;
   run1: number = 0;
   check = [];
+  checkStart = true;
+  timeStart: number;
+  wordLength: number;
 
   constructor(public db: AngularFireDatabase) {
 
@@ -35,39 +40,49 @@ export class TypeScreenComponent implements OnInit {
     let quoteInputElement = document.getElementById('typeInput');
     //hien thi para
     let quoteDisplay = document.getElementById('quote');
-    //do dai word
-    let wordLength = quoteDisplay.innerText.split(' ').length
-
-
-    this.run = (1 / (wordLength + 1) * 100);
-    
     quoteInputElement.addEventListener('input', () => {
+      if (this.checkStart) {
+        //do dai word
+        this.wordLength = quoteDisplay.innerText.split(' ').length;
+        this.run = (1 / (this.wordLength) * 100);
+        console.log(this.wordLength);
+        this.timeStart = Date.now();
+        this.checkStart = false;
+      }
+      // console.log(timeStart)
+      const characterLength = quoteDisplay.innerText.split('').length;
       // cat para
       const arrQuote = quoteDisplay.innerText.split(' ')[this.l2];
+      //cat tung ki tu
       const arrQuoteSplit = arrQuote.split('');
 
       //lay input
       let arrayValue = $('#typeInput').val().split('');
       let temp = arrayValue.pop();
-
-
+      // console.log(this.l2);
       if ((temp == '.' && arrQuoteSplit[arrayValue.length] == temp &&
-        this.check.filter(x => x == false).length == 0) && wordLength === this.l2) {
+        this.check.filter(x => x == false).length == 0) && this.wordLength === this.l2 + 1) {
         $('#quote').find(`span:nth-child(${this.l1 + arrayValue.length})`).css({ "color": "#3bbb1b", "background-color": "#ececec" })
+
 
         $('#typeInput').val(null);
         $('#typeInput').attr("placeholder", null);
         this.run1 += this.run;
-        
         $('.progress-bar').css("width", this.run1 + "%");
         $('.car-info').css("padding-left", this.run1 - 10 + "%")
+
+
+        const timeEnd = Date.now() - this.timeStart;
+        const wpm = Math.ceil((5 * characterLength / Math.floor(timeEnd / 1000)));
+        console.log(timeEnd/1000);
+        console.log(5 * characterLength)
+        alert(wpm + ' wpm');
       } else if ((temp == ' ' && arrQuoteSplit.length == arrayValue.length &&
         this.check.filter(x => x == false).length == 0)) {
+
         this.l1 += arrayValue.length + 1;
         this.l2++;
         this.run1 += this.run;
-        console.log(this.run1);
-        console.log(this.run);
 
         $('#typeInput').val(null);
         $('#typeInput').attr("placeholder", null);
@@ -111,3 +126,5 @@ export class TypeScreenComponent implements OnInit {
     return Math.floor(Math.random() * Math.floor(max));
   }
 }
+
+

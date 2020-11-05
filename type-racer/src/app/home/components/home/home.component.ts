@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     this.roomId = this.db.createPushId();
   }
   creGame() {
-    this.router.navigate(['/type-screen', this.roomId]);
+    this.router.navigate(['/test'], { queryParams: { roomId: this.roomId } });
   }
 
 }
