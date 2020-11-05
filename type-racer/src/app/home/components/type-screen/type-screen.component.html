@@ -23,8 +23,8 @@
     </div>
 
     <div class="start">
-      <button class="btn btn-start" (click)="start()">Ready</button>
-    </div>
+      <button class="btn btn-start" (click)="startTimer()">Start</button>
+      <h3 #timeBlock class="time-display">{{timeLeft}}</h3>
     <div class="start">
       <button class="btn btn-start" *ngIf="ready">Goo</button>
     </div>
@@ -38,8 +38,10 @@
             <span> {{ futureWords.join(" ") }}</span>
           </div>
           <div class="input">
-            <input [style.background-color]="checkInput()" [(ngModel)]="currentInput" (ngModelChange)="onInputChange()"
-              autofocus class="form-control text-center w-100" type="text" maxlength="20" placeholder="Type here...">
+            <input [style.background-color]="checkInput()" 
+            [(ngModel)]="currentInput" 
+            (ngModelChange)="onInputChange()"
+            type="text" [attr.disabled]="finished" maxlength="20" placeholder="Type here...">
           </div>
         </div>
       </div>
