@@ -23,7 +23,6 @@ export class TypeScreenComponent implements OnInit {
   public currentCharacter = '';
   public futureCharacter: string[] = [];
 
-
   timeLeft = 5;
   paragraphLength: number;
   item: any[];
@@ -32,20 +31,19 @@ export class TypeScreenComponent implements OnInit {
   index = 0;
   runProcess = 10;
   runDinosaur = 0;
-  check = [];
+  checkStart = true;
+  timeStart: number;
+  wordLength: number;
 
-  @ViewChild('quote', {static: true})
+  @ViewChild('quote', { static: true })
   private quote: ElementRef;
 
-  constructor(public db: AngularFireDatabase,
-              private render: Renderer2) {
+  constructor(public db: AngularFireDatabase, private render: Renderer2) {
   }
 
   ngOnInit(): void {
     $('#myTab a[href="#profile"]').tab('show');
-
     this.splitWord();
-  }
 
   startTimer(): void {
     var interval;
@@ -129,7 +127,7 @@ export class TypeScreenComponent implements OnInit {
     }
   }
 
-  moveDinosaur(): string{
+  moveDinosaur(): string {
     if (this.action) {
       return this.runDinosaur + '%';
     } else {
@@ -141,3 +139,5 @@ export class TypeScreenComponent implements OnInit {
     return Math.floor(Math.random() * Math.floor(max));
   }
 }
+
+
