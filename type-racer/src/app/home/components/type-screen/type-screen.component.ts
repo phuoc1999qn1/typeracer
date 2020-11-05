@@ -22,7 +22,6 @@ export class TypeScreenComponent implements OnInit {
   public currentCharacter = '';
   public futureCharacter: string[] = [];
 
-
   paragraphLength: number;
   item: any[];
   random: number;
@@ -30,46 +29,19 @@ export class TypeScreenComponent implements OnInit {
   index = 0;
   runProcess = 10;
   runDinosaur = 0;
-  //thu tu cua word
-  check = [];
   checkStart = true;
   timeStart: number;
   wordLength: number;
 
-  @ViewChild('quote', {static: true})
+  @ViewChild('quote', { static: true })
   private quote: ElementRef;
 
-  constructor(public db: AngularFireDatabase,
-              private render: Renderer2) {
+  constructor(public db: AngularFireDatabase, private render: Renderer2) {
   }
 
   ngOnInit(): void {
     $('#myTab a[href="#profile"]').tab('show'); // Select tab by name
     this.splitWord();
-    // setTimeout(() => {
-    //   console.log(this.paragraph)
-    // }, 2000);
-        
-      if (this.checkStart) {
-        //do dai word
-        this.wordLength = quoteDisplay.innerText.split(' ').length;
-        this.run = (1 / (this.wordLength) * 100);
-        console.log(this.wordLength);
-        this.timeStart = Date.now();
-        this.checkStart = false;
-      }
-      // console.log(timeStart)
-      const characterLength = quoteDisplay.innerText.split('').length;
-      //cat tung ki tu
-
-
-
-        const timeEnd = Date.now() - this.timeStart;
-        const wpm = Math.ceil((5 * characterLength / Math.floor(timeEnd / 1000)));
-        console.log(timeEnd/1000);
-        console.log(5 * characterLength)
-        alert(wpm + ' wpm');
-
 
   }
 
@@ -127,7 +99,7 @@ export class TypeScreenComponent implements OnInit {
     }
   }
 
-  checkInput(): string{
+  checkInput(): string {
     if (this.flag) {
       return '#f0a3a3';
     } else {
@@ -135,7 +107,7 @@ export class TypeScreenComponent implements OnInit {
     }
   }
 
-  moveProcess(): string{
+  moveProcess(): string {
     if (this.action) {
       return this.runProcess + '%';
     } else {
@@ -143,7 +115,7 @@ export class TypeScreenComponent implements OnInit {
     }
   }
 
-  moveDinosaur(): string{
+  moveDinosaur(): string {
     if (this.action) {
       return this.runDinosaur + '%';
     } else {
