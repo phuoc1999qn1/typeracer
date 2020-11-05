@@ -1,0 +1,26 @@
+import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit {
+  roomId: string;
+  constructor(private db: AngularFireDatabase, private router: Router) { }
+
+  ngOnInit(): void {
+    this.roomId = this.db.createPushId();
+  }
+<<<<<<< HEAD
+  creGame(): void {
+    this.router.navigate(['/type-screen', this.roomId]);
+=======
+  creGame() {
+    this.router.navigate(['/test'], { queryParams: { roomId: this.roomId } });
+>>>>>>> 1e4fefb1d6a845afb8adca9c2b0e6dace5957b1b
+  }
+
+}
