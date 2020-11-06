@@ -25,7 +25,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
 
   public flag: boolean;
   public action: boolean;
-  public finished: boolean;
+  public color: boolean;
 
   public pastWords: string[] = [];
   public currentWord = '';
@@ -36,7 +36,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   public currentCharacter = '';
   public futureCharacter: string[] = [];
 
-  timeLeft = 5;
+  timeLeft = 2;
   paragraphLength: number;
   item: any[];
   charArray: string[];
@@ -47,8 +47,14 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   timeStart: number;
   wordLength: number;
 
-  @ViewChild('quote', { static: true })
-  private quote: ElementRef;
+  @ViewChild('timeBlock', { static: true })
+  private timeBlock: ElementRef;
+
+  @ViewChild('btnStart', { static: true })
+  private btnStart: ElementRef;
+
+  @ViewChild('inputStyle', { static: true })
+  private inputStyle: ElementRef;
 
   constructor(public db: AngularFireDatabase, private render: Renderer2, private authService: AuthService, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(p => {
@@ -62,6 +68,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('onit');
     $('#myTab a[href="#profile"]').tab('show');
+    this.render.setAttribute(this.inputStyle.nativeElement, 'disabled', 'true');
     this.checkedLogin(() => {
       this.loadDb(() => {
         if (this.checkPlay) {
@@ -81,10 +88,15 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
 
   startTimer(): void {
     let interval;
+    this.render.setStyle(this.timeBlock.nativeElement, 'display', 'block');
     interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
+        this.render.setStyle(this.timeBlock.nativeElement, 'display', 'none');
+        this.render.setStyle(this.btnStart.nativeElement, 'display', 'none');
+        this.render.removeAttribute(this.inputStyle.nativeElement, 'disabled');
+        this.inputStyle.nativeElement.focus();
         clearInterval(interval);
       }
     }, 1000);
@@ -123,24 +135,27 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       this.runProcess += 90 / this.paragraphLength;
       this.myUser.runDinosaur += 86 / this.paragraphLength;
       this.itemUser.set(this.userId, this.myUser);
-      this.finished = true;
+      this.render.setAttribute(this.inputStyle.nativeElement, 'disabled', 'true');
     } else if (this.currentWord + ' ' === this.currentInput) {
       this.pastWords.push(this.currentWord);
       this.currentWord = this.futureWords[0];
       this.futureWords = this.futureWords.splice(1);
       this.currentInput = '';
-      this.runProcess += 90 / this.paragraphLength;
+      this.myUser.runProcess += 90 / this.paragraphLength;
 
-      this.runDinosaur += 86 / this.paragraphLength;
+      this.myUser.runDinosaur += 86 / this.paragraphLength;
 
-
+      this.itemUser.set(this.userId, this.myUser);
       this.myUser.runProcess += 90 / this.paragraphLength;
       this.myUser.runDinosaur += 86 / this.paragraphLength;
       this.itemUser.set(this.userId, this.myUser);
       this.action = true;
+      this.color = true;
     } else if (this.currentWord.startsWith(this.currentInput)) {
       this.flag = false;
+      this.color = true;
     } else {
+      this.color = false
       this.flag = true;
     }
   }
@@ -153,22 +168,31 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
     }
   }
 
-  moveProcess(): string {
-    if (this.action) {
-      // return this.myUser.runProcess + '%';
-      return this.runProcess + '%';
+  checkStyleParagraph() {
+    if (this.currentInput === null) {
+      return "#000";
+    } else if (!this.color) {
+      return '#f0a3a3';
     } else {
-      return;
+      return '#3bbb1b';
     }
   }
 
-  moveDinosaur(): string {
-    if (this.action) {
-      // return this.myUser.runDinosaur + '%';
-      return this.runDinosaur + '%';
-    } else {
-      return;
-    }
+  // moveProcess(): string {
+  //   if (this.action) {
+  //     // return this.myUser.runProcess + '%';
+  //     return this.runProcess + '%';
+  //   } else {
+  //     return;
+  //   }
+  // }
+
+  styleParseDinosaur(runP): string {
+    return 'padding-left:' + runP + '%';
+  }
+
+  styleParseProcess(runD): string {
+    return 'width:' + runD + '%';
   }
 
 
