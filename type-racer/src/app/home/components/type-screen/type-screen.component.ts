@@ -41,7 +41,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   item: any[];
   charArray: string[];
   index = 0;
-  runProcess = 10;
+  runProcess = 0;
   runDinosaur = 0;
   checkStart = true;
   timeStart: number;
@@ -139,7 +139,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       this.currentWord = this.futureWords[0];
       this.futureWords = this.futureWords.splice(1);
       this.currentInput = '';
-      this.myUser.runProcess += 90 / this.paragraphLength;
+      this.myUser.runProcess += 100 / this.paragraphLength;
 
       this.myUser.runDinosaur += 86 / this.paragraphLength;
 
