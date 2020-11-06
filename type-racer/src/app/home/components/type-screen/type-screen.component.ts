@@ -155,7 +155,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       this.flag = false;
       this.color = true;
     } else {
-      this.color = false
+      this.color = false;
       this.flag = true;
     }
   }
@@ -168,24 +168,15 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkStyleParagraph() {
+  checkStyleParagraph(): string {
     if (this.currentInput === null) {
-      return "#000";
+      return '#000';
     } else if (!this.color) {
       return '#f0a3a3';
     } else {
       return '#3bbb1b';
     }
   }
-
-  // moveProcess(): string {
-  //   if (this.action) {
-  //     // return this.myUser.runProcess + '%';
-  //     return this.runProcess + '%';
-  //   } else {
-  //     return;
-  //   }
-  // }
 
   styleParseDinosaur(runP): string {
     return 'padding-left:' + runP + '%';
