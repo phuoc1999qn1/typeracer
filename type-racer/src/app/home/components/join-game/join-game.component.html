@@ -4,11 +4,11 @@
       <h1>Join Game</h1>
       <div class="enter-form enter-id">
         <h6 class="text-center">Enter Room ID</h6>
-        <input class="form-control" type="text" placeholder="Enter Room ID">
+        <input class="form-control" [(ngModel)]="link" type="text" placeholder="Enter Room ID">
       </div>
       <div class="decision">
-        <button class="btn btn-create">Join</button>
-        <button routerLink="" class="btn btn-join">Cancel</button>
+        <button (click)="goto()" class="btn btn-create">Join</button>
+        <button  class="btn btn-join">Cancel</button>
       </div>
     </div>
   </div>

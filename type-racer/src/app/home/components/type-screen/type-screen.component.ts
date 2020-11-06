@@ -60,11 +60,13 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('onit');
     $('#myTab a[href="#profile"]').tab('show');
     this.checkedLogin(() => {
       this.loadDb(() => {
         if (this.checkPlay) {
           this.splitWord();
+          this.checkPlay = false;
         }
       });
     });
@@ -74,6 +76,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.itemUser.remove(this.userId);
     this.checkLogout = false;
+    console.log('destroy');
   }
 
   startTimer(): void {
@@ -126,13 +129,14 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       this.currentWord = this.futureWords[0];
       this.futureWords = this.futureWords.splice(1);
       this.currentInput = '';
-      // this.myUser.runProcess += 90 / this.paragraphLength;
       this.runProcess += 90 / this.paragraphLength;
 
-      // this.myUser.runDinosaur += 86 / this.paragraphLength;
       this.runDinosaur += 86 / this.paragraphLength;
 
-      // this.itemUser.set(this.userId, this.myUser);
+
+      this.myUser.runProcess += 90 / this.paragraphLength;
+      this.myUser.runDinosaur += 86 / this.paragraphLength;
+      this.itemUser.set(this.userId, this.myUser);
       this.action = true;
     } else if (this.currentWord.startsWith(this.currentInput)) {
       this.flag = false;
@@ -209,17 +213,20 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       if (this.checkLogout) {
         if (res.length === 0) {
           this.myUser.para = this.RandomPara();
+          // console.log(1);
           this.itemUser.set(this.userId, this.myUser);
         } else {
           this.listUser = res;
           this.myUser.para = this.listUser[0].para;
           if (this.listUser.filter((e) => e.id === this.myUser.id).length === 0) {
             this.itemUser.set(this.userId, this.myUser);
+            // console.log(2);
           }
           if (this.listUser.filter((e) => e.ready === true).length === this.listUser.length) {
             this.ready = true;
           } else { this.ready = false; }
         }
+        console.log(this.listUser);
         callback();
       }
     });
