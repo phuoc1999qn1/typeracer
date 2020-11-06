@@ -1,11 +1,12 @@
 <section class="type-screen">
   <div class="container">
+
     <div class="row">
       <div class="col-8">
         <div class="race-area">
-          <div class="car" *ngFor="let u of listUser; index as idx">
+          <div class="car" *ngFor="let u of listUser;">
             <div [style]="styleParseDinosaur(u.runDinosaur)" class="car-info">
-              <h3>{{u.name}}</h3> 
+              <h3>{{u.name}}</h3>
               <img src="assets/img/car/dinorsaur.png">
             </div>
             <div class="progress">
@@ -19,24 +20,19 @@
     </div>
 
     <div class="start">
-      <button #btnStart class="btn btn-start" (click)="startTimer()">Start</button>
+      <button #btnStart class="btn btn-start" (click)="start()">{{x}}</button>
       <h3 #timeBlock class="time-display">{{timeLeft}}</h3>
-      <div class="start">
-        <button class="btn btn-start" *ngIf="ready">Goo</button>
-      </div>
-
       <div class="row">
         <div class="col-8">
           <div class="footer">
-          <div class="text-area">
+            <div class="text-area">
               <span style="color:#3bbb1b;">{{ pastWords.join(" ") }} </span>
               <span [style.color]="checkStyleParagraph()" style="text-decoration: underline;">{{ currentWord }}</span>
               <span> {{ futureWords.join(" ") }}</span>
             </div>
             <div class="input">
               <input #inputStyle [style.background-color]="checkInput()" [(ngModel)]="currentInput"
-                (ngModelChange)="onInputChange()" type="text" maxlength="20"
-                placeholder="Type here...">
+                (ngModelChange)="onInputChange()" type="text" maxlength="20" placeholder="Type here...">
             </div>
           </div>
         </div>

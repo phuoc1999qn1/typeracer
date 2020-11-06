@@ -11,7 +11,7 @@ declare var $;
   styleUrls: ['./type-screen.component.scss'],
 })
 export class TypeScreenComponent implements OnInit, OnDestroy {
-
+  x = 'Start';
   myUser: any = {};
   listUser = [];
   itemUser: any = [];
@@ -21,7 +21,8 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   checkLogin = true;
   checkLogout = true;
   checkPlay = true;
-  currentInput: string;
+  checkPlayGame = true;
+  currentInput: '';
 
   public flag: boolean;
   public action: boolean;
@@ -66,7 +67,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('onit');
+    // console.log('onit');
     $('#myTab a[href="#profile"]').tab('show');
     this.render.setAttribute(this.inputStyle.nativeElement, 'disabled', 'true');
     this.checkedLogin(() => {
@@ -83,7 +84,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.itemUser.remove(this.userId);
     this.checkLogout = false;
-    console.log('destroy');
+    // console.log('destroy');
   }
 
   startTimer(): void {
@@ -109,22 +110,6 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
     this.pastWords = [];
     this.currentWord = parts[0];
     this.futureWords = parts.splice(1);
-
-
-    // this.item = this.item[this.myUser.para].split('');
-    // this.pastCharacter = [];
-    // this.currentCharacter = this.item[0];
-    // this.futureCharacter = this.item;
-    // this.futureCharacter = this.futureCharacter.splice(1);
-    // console.log(this.futureCharacter);
-
-    // console.log(this.charArray)
-    // var quote = this.item;
-    // quote.forEach((chara) => {
-    //   var charaSpan = document.createElement('span');
-    //   charaSpan.innerText = chara;
-    //   this.render.appendChild(this.quote.nativeElement, charaSpan);
-    // });
   }
 
   onInputChange(): void {
@@ -141,11 +126,6 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       this.currentWord = this.futureWords[0];
       this.futureWords = this.futureWords.splice(1);
       this.currentInput = '';
-      this.myUser.runProcess += 90 / this.paragraphLength;
-
-      this.myUser.runDinosaur += 86 / this.paragraphLength;
-
-      this.itemUser.set(this.userId, this.myUser);
       this.myUser.runProcess += 90 / this.paragraphLength;
       this.myUser.runDinosaur += 86 / this.paragraphLength;
       this.itemUser.set(this.userId, this.myUser);
@@ -239,9 +219,13 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
           }
           if (this.listUser.filter((e) => e.ready === true).length === this.listUser.length) {
             this.ready = true;
+            if (this.checkPlayGame) {
+              this.startTimer();
+              this.checkPlayGame = false;
+            }
           } else { this.ready = false; }
         }
-        console.log(this.listUser);
+        // console.log(this.listUser);
         callback();
       }
     });
@@ -268,6 +252,8 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
 
   start(): void {
     this.myUser.ready = !this.myUser.ready;
+    if (this.myUser.ready) { this.x = 'Ready'; }
+    else { this.x = 'Start'; }
     this.itemUser.set(this.userId, this.myUser);
   }
 }
