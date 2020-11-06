@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-join-game',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JoinGameComponent implements OnInit {
 
-  constructor() { }
+  link: string;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goto(): void {
+    this.router.navigate(['/type-screen'], { queryParams: { roomId: this.link } });
   }
 
 }

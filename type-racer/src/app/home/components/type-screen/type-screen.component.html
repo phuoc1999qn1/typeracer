@@ -1,13 +1,9 @@
 <section class="type-screen">
   <div class="container">
-    <div *ngIf="listUser">
-      <p *ngFor="let u of listUser"> {{u.id}} - {{u.name}} - {{u.ready}} - {{u.process}}</p>
-    </div>
-
     <div class="row">
       <div class="col-8">
-        <div class="race-area" *ngIf="listUser">
-          <div class="car" *ngFor="let u of listUser">
+        <div class="race-area">
+          <div class="car" *ngFor="let u of listUser; index as idx">
             <div [style]="styleParseDinosaur(u.runDinosaur)" class="car-info">
               <h3>{{u.name}}</h3> 
               <img src="assets/img/car/dinorsaur.png">

@@ -66,6 +66,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('onit');
     $('#myTab a[href="#profile"]').tab('show');
     this.render.setAttribute(this.inputStyle.nativeElement, 'disabled', 'true');
     this.checkedLogin(() => {
@@ -82,6 +83,7 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.itemUser.remove(this.userId);
     this.checkLogout = false;
+    console.log('destroy');
   }
 
   startTimer(): void {
@@ -144,13 +146,16 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       this.myUser.runDinosaur += 86 / this.paragraphLength;
 
       this.itemUser.set(this.userId, this.myUser);
+      this.myUser.runProcess += 90 / this.paragraphLength;
+      this.myUser.runDinosaur += 86 / this.paragraphLength;
+      this.itemUser.set(this.userId, this.myUser);
       this.action = true;
       this.color = true;
     } else if (this.currentWord.startsWith(this.currentInput)) {
       this.flag = false;
       this.color = true;
     } else {
-      this.color = false
+      this.color = false;
       this.flag = true;
     }
   }
@@ -163,24 +168,15 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkStyleParagraph() {
+  checkStyleParagraph(): string {
     if (this.currentInput === null) {
-      return "#000";
+      return '#000';
     } else if (!this.color) {
       return '#f0a3a3';
     } else {
       return '#3bbb1b';
     }
   }
-
-  // moveProcess(): string {
-  //   if (this.action) {
-  //     // return this.myUser.runProcess + '%';
-  //     return this.runProcess + '%';
-  //   } else {
-  //     return;
-  //   }
-  // }
 
   styleParseDinosaur(runP): string {
     return 'padding-left:' + runP + '%';
@@ -232,17 +228,20 @@ export class TypeScreenComponent implements OnInit, OnDestroy {
       if (this.checkLogout) {
         if (res.length === 0) {
           this.myUser.para = this.RandomPara();
+          // console.log(1);
           this.itemUser.set(this.userId, this.myUser);
         } else {
           this.listUser = res;
           this.myUser.para = this.listUser[0].para;
           if (this.listUser.filter((e) => e.id === this.myUser.id).length === 0) {
             this.itemUser.set(this.userId, this.myUser);
+            // console.log(2);
           }
           if (this.listUser.filter((e) => e.ready === true).length === this.listUser.length) {
             this.ready = true;
           } else { this.ready = false; }
         }
+        console.log(this.listUser);
         callback();
       }
     });
