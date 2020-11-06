@@ -16,7 +16,7 @@ export class JoinGameComponent implements OnInit {
   }
 
   goto(): void {
-    this.router.navigate(['/type-screen'], { queryParams: { roomId: this.link } });
+    this.router.navigate(['/type-screen'], { queryParams: { roomId: '-' + this.link } });
   }
 
 }
